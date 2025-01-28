@@ -12,6 +12,8 @@
   "dependencies": {
     "express": "^4.21.2",
     "expressmg-demo": "file:",
-    "joi": "^17.13.3"
+    "helmet": "^8.0.0",
+    "joi": "^17.13.3",
+    "morgan": "^1.10.0"
   }
 }

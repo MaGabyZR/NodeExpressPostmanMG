@@ -1,3 +1,7 @@
+//load helmet.
+const helmet = require('helmet');
+//load morgan
+const morgan = require('morgan');
 //load de joi module, for input validation, it returns a class.
 const Joi = require('joi');
 const logger = require ('./logger');
@@ -7,7 +11,15 @@ const express = require('express');
 const app = express(); //by default we store the result in a constant called app, to represent our application. 
 
 app.use(express.json()); //to enable parsing of json objects in the body of a post request. 
-app.use(express.urlencoded()); //parses encoming requests with url encoded payloads and populates them as a json object.
+app.use(express.urlencoded({ extended: true })); //parses encoming requests with url encoded payloads and populates them as a json object.
+app.use(express.static('public')); //to serve static content, like css files, images, etc.
+app.use(helmet());
+
+//to test in what environment you are working. 
+if (app.get('env') === 'development'){
+    app.use(morgan('tiny'));
+    console.log('Morgan enabled...')
+}
 
 //call the middleware function from logger.js
 app.use(logger);
