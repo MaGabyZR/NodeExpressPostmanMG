@@ -1,10 +1,18 @@
 //load de joi module, for input validation, it returns a class.
 const Joi = require('joi');
+const logger = require ('./logger');
+const auth = require ('./auth');
 //load the express module
 const express = require('express');
 const app = express(); //by default we store the result in a constant called app, to represent our application. 
 
 app.use(express.json()); //to enable parsing of json objects in the body of a post request. 
+
+//call the middleware function from logger.js
+app.use(logger);
+
+//call the middleware function from auth.js
+app.use(auth);
 
 //Define the courses array
 const courses = [
