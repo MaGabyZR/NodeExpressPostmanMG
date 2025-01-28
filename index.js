@@ -13,8 +13,8 @@ const courses = [
     { id : 3, name : 'course 3' },
 ];
 
-//App useful methods corresponding to HTTP requests:
-app.get('/', (req, res) =>{ //this is how we define a route.
+//Define a route. It is also a middleware function.
+app.get('/', (req, res) =>{
     res.send('Hello Monti!!!');
 });
 
@@ -57,7 +57,8 @@ app.delete('/api/courses/:id', (req, res) => {
     res.send(course);
 });
 
-//GET Request. To GET a specific course, use a route parameter and in this case we use id as the parameter. And return a 404 error if the course is not find.
+//GET Request. To GET a specific course, use a route parameter and in this case we use id as the parameter. 
+// And return a 404 error if the course is not find.
 app.get('/api/courses/:id', (req, res) => {
     const course = courses.find(c => c.id === parseInt(req.params.id));
     if (!course) return res.status(404).send('The course with the given ID was not found.');
