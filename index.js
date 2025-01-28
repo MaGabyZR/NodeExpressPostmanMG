@@ -7,6 +7,7 @@ const express = require('express');
 const app = express(); //by default we store the result in a constant called app, to represent our application. 
 
 app.use(express.json()); //to enable parsing of json objects in the body of a post request. 
+app.use(express.urlencoded()); //parses encoming requests with url encoded payloads and populates them as a json object.
 
 //call the middleware function from logger.js
 app.use(logger);
