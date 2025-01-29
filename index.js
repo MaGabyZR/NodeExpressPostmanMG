@@ -1,19 +1,21 @@
-//load helmet.
-const helmet = require('helmet');
-//load morgan
-const morgan = require('morgan');
-//load de joi module, for input validation, it returns a class.
-const Joi = require('joi');
+const config = require('config');//load the config module.
+const helmet = require('helmet');//load helmet.
+const morgan = require('morgan');//load morgan
+const Joi = require('joi');//load de joi module, for input validation, it returns a class.
 const logger = require ('./logger');
 const auth = require ('./auth');
-//load the express module
-const express = require('express');
+const express = require('express');//load the express module
 const app = express(); //by default we store the result in a constant called app, to represent our application. 
 
 app.use(express.json()); //to enable parsing of json objects in the body of a post request. 
 app.use(express.urlencoded({ extended: true })); //parses encoming requests with url encoded payloads and populates them as a json object.
 app.use(express.static('public')); //to serve static content, like css files, images, etc.
 app.use(helmet());
+
+//Configuration
+console.log('Application Name: ' + config.get('name'));
+console.log('Mail Server: ' + config.get('mail.host'));
+console.log('Mail Password: ' + config.get('mail.password'));
 
 //to test in what environment you are working. 
 if (app.get('env') === 'development'){

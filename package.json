@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "config": "^3.3.12",
     "express": "^4.21.2",
     "expressmg-demo": "file:",
     "helmet": "^8.0.0",
