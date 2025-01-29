@@ -1,3 +1,5 @@
+const startupDebugger = require('debug') ('app:startup'); //load the debug package from Node.
+const dbDebugger = require('debug') ('app:debug'); //Debugger for databases.
 const config = require('config');//load the config module.
 const helmet = require('helmet');//load helmet.
 const morgan = require('morgan');//load morgan
@@ -15,13 +17,16 @@ app.use(helmet());
 //Configuration
 console.log('Application Name: ' + config.get('name'));
 console.log('Mail Server: ' + config.get('mail.host'));
-console.log('Mail Password: ' + config.get('mail.password'));
+//console.log('Mail Password: ' + config.get('mail.password'));
 
 //to test in what environment you are working. 
-if (app.get('env') === 'development'){
+if (app.get('env') === 'development') {
     app.use(morgan('tiny'));
-    console.log('Morgan enabled...')
+    startupDebugger('Morgan enabled...');
 }
+
+//if you work with a DB, for example.
+dbDebugger('Connected to the database...')
 
 //call the middleware function from logger.js
 app.use(logger);
