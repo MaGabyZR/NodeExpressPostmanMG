@@ -9,6 +9,10 @@ const auth = require ('./auth');
 const express = require('express');//load the express module
 const app = express(); //by default we store the result in a constant called app, to represent our application. 
 
+//set the PUG templating engine. 
+app.set('view engine', 'pug'); //Express can load it automatically.
+app.set('views', './views'); // it is the default folder where all our templates are stored.
+
 app.use(express.json()); //to enable parsing of json objects in the body of a post request. 
 app.use(express.urlencoded({ extended: true })); //parses encoming requests with url encoded payloads and populates them as a json object.
 app.use(express.static('public')); //to serve static content, like css files, images, etc.
@@ -43,7 +47,8 @@ const courses = [
 
 //Define a route. It is also a middleware function.
 app.get('/', (req, res) =>{
-    res.send('Hello Monti!!!');
+    //res.send('Hello Monti!!!'); Replaced with the render method to use PUG and return a HTML markup to the client.
+    res.render('index', { title: 'My Express App', message: 'Hello!'}); //you call the pug file and render its values dinamically. 
 });
 
 //Define a post request and its path, and create a new course object and push it on the array.
