@@ -1,5 +1,6 @@
 const express = require('express'); //load the Express module.
 const router = express.Router(); //to call express in this separate module.Here you work with a router object, instead of an app object. 
+const Joi = require('joi'); //load de joi module, for input validation, it returns a class.
 
 //Define the courses array
 const courses = [
